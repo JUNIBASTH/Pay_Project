@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
+import { Request, Response } from 'express'; 
 import User from '../models/User';
 
 export const register = async (req: Request, res: Response) => {
@@ -14,7 +14,7 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) =>{
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
