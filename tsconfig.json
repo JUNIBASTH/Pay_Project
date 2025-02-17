@@ -3,9 +3,13 @@
       "target": "ES6",
       "module": "CommonJS",
       "outDir": "./dist",
-      "rootDir": "./backend",
+      "rootDir": "./",  
       "strict": true,
       "esModuleInterop": true
-    }
+    },
+    "include": [
+      "backend/**/*",   
+      "frontend/**/*"   
+    ]
   }
   
