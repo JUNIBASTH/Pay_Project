@@ -1,39 +1,53 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../config/db';
 
-// Definir la interfaz de atributos del usuario
-interface UserAttributes {
-  id: number;
+export interface IUser {
+  id?: number;
   nombre: string;
   email: string;
   password: string;
   rol: 'admin' | 'empleado';
 }
 
-// Opcional para evitar definir manualmente los campos autogenerados
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
-
-// Definir el modelo extendiendo Model
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+export class User extends Model<IUser> implements IUser {
   public id!: number;
   public nombre!: string;
   public email!: string;
   public password!: string;
   public rol!: 'admin' | 'empleado';
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 User.init(
   {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    nombre: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    password: { type: DataTypes.STRING, allowNull: false },
-    rol: { type: DataTypes.ENUM('admin', 'empleado'), defaultValue: 'empleado' }
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    nombre: { 
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    rol: {
+      type: DataTypes.ENUM('admin', 'empleado'),
+      allowNull: false,
+      defaultValue: 'empleado',
+    },
   },
   {
-    sequelize,
-    modelName: 'User'
+    tableName: 'users',
+    sequelize, // conexión de Sequelize
   }
 );
-
-export default User;

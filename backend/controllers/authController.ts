@@ -1,7 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express'; 
-import User from '../models/User';
+import { User } from '../models/User';
+import { RequestHandler } from 'express';
+
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -14,16 +16,17 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response): Promise<Response> => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ where: { email } });
-      if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: 'Credenciales inválidas' });
-      }
-      const token = jwt.sign({ id: user.id, rol: user.rol }, process.env.JWT_SECRET!, { expiresIn: '1h' });
-      return res.json({ token, user });
-    } catch (error) {
-      return res.status(500).json({ message: 'Error al iniciar sesión' });
+export const login: RequestHandler = async (req, res): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email } });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      res.status(401).json({ message: 'Credenciales inválidas' });
+      return;
     }
-  };
+    const token = jwt.sign({ id: user.id, rol: user.rol }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+    res.json({ token, user });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al iniciar sesión' });
+  }
+};
