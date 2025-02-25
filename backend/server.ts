@@ -10,9 +10,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
 
 app.use(express.json());
 // Middleware
@@ -42,3 +39,9 @@ const startServer = async () => {
 };
 
 startServer();
+
+// Middleware para manejar errores y devolver JSON
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Error interno del servidor', error: err.message });
+});
