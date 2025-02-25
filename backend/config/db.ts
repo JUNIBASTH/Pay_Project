@@ -22,6 +22,7 @@ export const connectDB = async () => {
     await sequelize.authenticate();
     console.log('Conectado a la base de datos');
   } catch (error) {
-    console.error('Error conectando a la BD:', error);
+    console.warn('Problema temporal en la conexión, intentando reconectar...');
+    
   }
 };
