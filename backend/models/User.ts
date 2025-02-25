@@ -50,5 +50,6 @@ User.init(
   {
     tableName: 'usuarios',
     sequelize, // conexión de Sequelize
+    timestamps: false
   }
 );

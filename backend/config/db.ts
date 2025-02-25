@@ -6,7 +6,7 @@ dotenv.config();
 export const sequelize = new Sequelize(
   process.env.DB_NAME || 'nombre_db',
   process.env.DB_USER || 'usuario',
-  process.env.DB_PASSWORD || 'contraseña',
+  process.env.DB_PASS || 'contraseña',
 
   
   {
