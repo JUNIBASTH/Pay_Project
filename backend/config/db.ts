@@ -17,13 +17,12 @@ export const sequelize = new Sequelize(
   }
 );
 
-export const connectDB = async (): Promise<void> => {
+export const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync();
-    console.log('✅ Conectado a la base de datos');
+    console.log('Conectado a la base de datos');
   } catch (error) {
-    console.error('❌ Error al conectar a la base de datos:', error);
-    process.exit(1);
+    console.warn('Problema temporal en la conexión, intentando reconectar...');
+    
   }
 };

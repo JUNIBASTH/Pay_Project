@@ -39,6 +39,7 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'contraseña'
     },
     rol: {
       type: DataTypes.ENUM('admin', 'empleado'),
@@ -47,7 +48,7 @@ User.init(
     },
   },
   {
-    tableName: 'users',
+    tableName: 'usuarios',
     sequelize, // conexión de Sequelize
   }
 );
