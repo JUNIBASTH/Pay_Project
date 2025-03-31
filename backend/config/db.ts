@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+/*import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,5 +24,24 @@ export const connectDB = async () => {
   } catch (error) {
     console.warn('Problema temporal en la conexión, intentando reconectar...');
     
+  }
+};
+*/
+
+// src/config/database.ts (o donde tengas la conexión)
+
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/pay_project';
+
+export const connectDB = async () => {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log('✅ Conectado a MongoDB');
+  } catch (error) {
+    console.warn('❌ Error conectando a MongoDB:', error);
   }
 };
