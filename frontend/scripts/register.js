@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const datos = { nombre, email, password, rol };
 
     try {
-      const respuesta = await fetch('http://localhost:5000/api/register', {
+      const respuesta = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
