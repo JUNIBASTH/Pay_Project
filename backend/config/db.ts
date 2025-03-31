@@ -39,9 +39,10 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/pay_projec
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI!);
     console.log('✅ Conectado a MongoDB');
   } catch (error) {
-    console.warn('❌ Error conectando a MongoDB:', error);
+    console.error('❌ Error conectando a MongoDB:', error);
+    process.exit(1); // Detiene el servidor si falla la DB
   }
 };
