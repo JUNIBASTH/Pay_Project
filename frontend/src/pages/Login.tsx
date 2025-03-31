@@ -39,29 +39,40 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <h1>Iniciar Sesión</h1>
+      {/* Logo opcional */}
+      {/* <img src="/logo.svg" alt="Logo" /> */}
+  
+      <h1>Login</h1>
+  
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          type="password"
-          id="password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <button type="submit">Entrar</button>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+  
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+  
+        <div className="forgot">Forgot password?</div>
+  
+        <button type="submit">Sign In</button>
       </form>
-      <div>{message}</div>
+  
+      {message && <div id="message">{message}</div>}
     </div>
   );
 }
