@@ -10,6 +10,6 @@
     "include": [
       "backend/**/*",   
       "frontend/**/*"   
-    ]
+, "frontend-old/scripts"    ]
   }
   

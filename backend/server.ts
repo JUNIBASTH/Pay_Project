@@ -1,20 +1,33 @@
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 import employeeRoutes from './routes/employeeRoutes';
+import authRoutes from './routes/authRoutes'; // si tenés rutas de login
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json()); // Necesario para que req.body funcione
+// 🛡️ CORS debe ir ANTES de cualquier otra cosa
+app.use(cors({
+  origin: 'http://localhost:5173', // o '*', solo para desarrollo
+  credentials: true
+}));
 
+// 🔧 Middleware
+app.use(express.json());
+
+// 🔌 Conexión a DB
 connectDB();
 
-// 👇 Esto monta las rutas bajo "/api"
+// 📦 Rutas
 app.use('/api', employeeRoutes);
+app.use('/api/auth', authRoutes); 
 
+
+// 🚀 Servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
