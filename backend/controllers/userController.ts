@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import bcrypt from 'bcrypt';
-import { User } from '../models/User';
+import User from '../models/User';
 
 export const createUser: RequestHandler = async (req, res): Promise<void> => {
   try {
@@ -15,7 +15,7 @@ export const createUser: RequestHandler = async (req, res): Promise<void> => {
 
 export const getUsers: RequestHandler = async (req, res): Promise<void> => {
   try {
-    const users = await User.findAll();
+    const users = await User.find();
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener los usuarios' });

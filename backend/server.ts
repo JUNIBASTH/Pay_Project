@@ -1,11 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { connectDB } from './config/db';
 import employeeRoutes from './routes/employeeRoutes';
 import authRoutes from './routes/authRoutes'; // si tenés rutas de login
+import userRoutes from './routes/userRoutes';
 
-dotenv.config();
+
+dotenv.config({ path: path.resolve(__dirname, './.env') });
+//dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,7 +29,7 @@ connectDB();
 // 📦 Rutas
 app.use('/api', employeeRoutes);
 app.use('/api/auth', authRoutes); 
-
+app.use('/api/users', userRoutes);
 
 // 🚀 Servidor
 app.listen(PORT, () => {
