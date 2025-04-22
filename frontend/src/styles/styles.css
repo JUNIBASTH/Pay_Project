@@ -3,7 +3,67 @@
     padding: 0;
     box-sizing: border-box;
   }
+  /* Botón reutilizable (igual que login) */
+.btn {
+  background-color: #12C48B;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #0fa378;
+}
+
+/* Botón rojo (para cerrar sesión) */
+.btn-red {
+  background-color: #dc2626;
+}
+
+.btn-red:hover {
+  background-color: #b91c1c;
+}
+
+/* Contenedor de botones horizontales con separación */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+  .dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
   
+  .dashboard-table th,
+  .dashboard-table td {
+    padding: 16px;
+    border: 1px solid #d1d5db; /* líneas visibles */
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .dashboard-table th {
+    background-color: #f0f4f8;
+    color: #333;
+    font-weight: 600;
+  }
+
   /* Fondo general y centrado */
   body {
     font-family: 'Inter', sans-serif;

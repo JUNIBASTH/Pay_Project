@@ -11,7 +11,7 @@ const CrearPlanilla = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/planillas', {
+      const response = await axios.post('http://localhost:5000/api/planillas', {
         nombre,
         fechaInicio,
         fechaFin

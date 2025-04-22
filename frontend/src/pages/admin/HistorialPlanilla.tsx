@@ -12,9 +12,13 @@ const HistorialPlanilla = () => {
   const [pagos, setPagos] = useState<PagoEmpleado[]>([]);
 
   useEffect(() => {
-    axios.get<Planilla[]>('/api/planillas')
-      .then(res => setPlanillas(res.data))
-      .catch(err => console.error(err));
+    axios.get<Planilla[]>('http://localhost:5000/api/planillas')
+  .then(res => {
+    console.log('Respuesta de /api/planillas:', res.data);
+    setPlanillas(res.data);
+  })
+  .catch(err => console.error(err));
+
   }, []);
 
   const obtenerHistorial = async () => {

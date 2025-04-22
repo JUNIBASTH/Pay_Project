@@ -13,4 +13,13 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+    try {
+      const planillas = await Planilla.find();
+      res.json(planillas);
+    } catch (error) {
+      res.status(500).json({ error: 'Error al obtener planillas' });
+    }
+  });
+
 export default router;
