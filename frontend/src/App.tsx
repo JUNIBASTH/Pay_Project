@@ -22,11 +22,7 @@ function App() {
       } />
 
       {/* Solo admin puede registrar usuarios */}
-      <Route path="/register" element={
-        <PrivateRoute role="admin">
-          <Register />
-        </PrivateRoute>
-      } />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }

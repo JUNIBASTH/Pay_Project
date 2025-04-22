@@ -11,6 +11,9 @@ export const verifyToken = (req: AuthRequest, res: Response, next: NextFunction)
     res.status(401).json({ message: 'No token provided' });
     return 
   }
+
+  console.log('🔐 Verificando token...');
+  
   jwt.verify(token, process.env.JWT_SECRET!, (err, decoded) => {
     if (err) {
       res.status(401).json({ message: 'Token inválido' });

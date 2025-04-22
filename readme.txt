@@ -102,6 +102,16 @@ GET /api/employees: ver lista
 POST /api/employees: agregar nuevo (solo admin)
 
 
+nombre: 'Super Admin',
+  email: 'admin@empresa.com',
+  password: '$2b$10$JjdZh1R8JqVxakP4blfZ/uRhl8EJqXuLezjwoouAmGXXtGBJRQpMO',
+  rol: 'admin',
+  _id: new ObjectId('67f37ec581d870f8106416db'),
+  __v: 0
+
+
+  email: 'admin@gmail.com',
+  password: 'admin123',
 -----------------------------------------------------------------------------------------------------------------
 
 Estructura del proyecto

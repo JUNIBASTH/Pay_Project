@@ -11,7 +11,7 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
@@ -20,17 +20,20 @@ export default function Login() {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       if (!response.ok) {
         setMessage('Credenciales inválidas');
         return;
       }
-
+  
       const data = await response.json();
+  
+      // ✅ Guardar token y usuario
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+  
       setMessage('Login exitoso ✅');
-      console.log('Token:', data.token);
-      navigate('/dashboard');
-
+      navigate('/dashboard'); // ✅ Redirigir al dashboard
     } catch (error) {
       console.error(error);
       setMessage('Error al iniciar sesión');

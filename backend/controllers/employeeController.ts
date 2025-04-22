@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
 import Employee from '../models/Employee';
 
-export const getAllEmployees = async (_req: Request, res: Response) => {
-    try {
-      const employees = await Employee.find();
-      res.json(employees);
-    } catch (err) {
-      res.status(500).json({ message: 'Error obteniendo empleados' });
-    }
-  };
+export const getAllEmployees = async (req: Request, res: Response) => {
+  console.log('📥 GET /api/employees llegó al controlador');
+  try {
+    const employees = await Employee.find();
+    res.json(employees);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener empleados' });
+  }
+};
 
 export const createEmployee = async (req: Request, res: Response) => {
   try {
