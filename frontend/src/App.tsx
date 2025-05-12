@@ -1,6 +1,6 @@
 
 import './App.css'
-import Home from './pages/Home';
+//import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -15,9 +15,8 @@ import AgregarEmpleadosPlanilla from './pages/admin/AgregarEmpleadosPlanilla';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
-
       {/* Solo admin puede acceder a Dashboard */}
       <Route path="/dashboard" element={
         <PrivateRoute role="admin">

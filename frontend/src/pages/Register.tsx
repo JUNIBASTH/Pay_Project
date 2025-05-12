@@ -34,10 +34,11 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h1>Registrar Nuevo Usuario</h1>
+    <div className="login-container">
+      <h1>Registrar Usuario</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="nombre">Nombre:</label>
+
+        <label htmlFor="nombre">Nombre</label>
         <input
           type="text"
           id="nombre"
@@ -45,9 +46,8 @@ export default function Register() {
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
         />
-        <br />
 
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Correo electrónico</label>
         <input
           type="email"
           id="email"
@@ -55,9 +55,8 @@ export default function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br />
 
-        <label htmlFor="password">Contraseña:</label>
+        <label htmlFor="password">Contraseña</label>
         <input
           type="password"
           id="password"
@@ -65,22 +64,22 @@ export default function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <br />
 
-        <label htmlFor="rol">Rol:</label>
+        <label htmlFor="rol">Rol</label>
         <select
           id="rol"
           value={rol}
           onChange={(e) => setRol(e.target.value)}
+          style={{ marginBottom: '20px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '100%' }}
         >
           <option value="user">Empleado</option>
           <option value="admin">Admin</option>
         </select>
-        <br />
 
         <button type="submit">Registrar</button>
       </form>
-      <div>{message}</div>
+
+      {message && <p style={{ marginTop: '16px', color: '#12C48B' }}>{message}</p>}
     </div>
   );
 }

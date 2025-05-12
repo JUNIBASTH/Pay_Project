@@ -17,6 +17,8 @@ interface Empleado {
 
 const colores = ['#12C48B', '#5DADE2', '#F4D03F', '#EC7063'];
 
+const userData = localStorage.getItem('user');
+const user = userData ? JSON.parse(userData) : null;
 
 const Dashboard = () => {
   const [datosEmpleados, setDatosEmpleados] = useState<
@@ -69,6 +71,7 @@ const [datosPorRol, setDatosPorRol] = useState<
 
   const cerrarSesion = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
@@ -82,11 +85,14 @@ const [datosPorRol, setDatosPorRol] = useState<
         <button className="btn" onClick={() => document.getElementById('empleados')?.scrollIntoView()}>Empleados</button>
         <button className="btn" onClick={() => navigate('/historial-planilla')}>Nóminas</button>
         <button className="btn" onClick={() => navigate('/crear-planilla')}>Crear planilla</button>
+        <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
         <button className="btn" onClick={() => navigate('/agregar-empleados')}>Agregar empleados</button>
         <button className="btn" onClick={() => navigate('/historial-planilla')}>Historial</button>
         <button className="btn btn-red" onClick={cerrarSesion}>Cerrar sesión</button>
       </div>
-
+      <h1 style={{ fontSize: '28px', marginBottom: '24px' }}>
+        Panel de Administrador {user?.name && `- Bienvenido, ${user.name}`}
+      </h1>
       {/* Tabla de empleados */}
       <section id="empleados">
         <h2 style={{ fontSize: '20px', marginTop: '40px' }}>Lista de Empleados</h2>

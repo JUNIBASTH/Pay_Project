@@ -7,6 +7,7 @@
   import authRoutes from './routes/authRoutes'; 
   import userRoutes from './routes/userRoutes';
   import planillaRoutes from './routes/planilla.routes';
+  import pagoEmpleadoRoutes from './routes/pagoEmpleado.routes';
 
   dotenv.config({ path: path.resolve(__dirname, './.env') });
   //dotenv.config();
@@ -36,6 +37,8 @@
   app.use('/api/auth', authRoutes); 
   app.use('/api/users', userRoutes);
   app.use('/api/planillas', planillaRoutes);
+  app.use('/api/pagos-empleado', pagoEmpleadoRoutes);
+
   app.use(express.json());
 
   // 🚀 Servidor
