@@ -1,12 +1,16 @@
 import EmpleadoForm, { FormData } from '../../components/EmpleadoForm';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export default function EditarEmpleado() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [datos, setDatos] = useState<Partial<FormData>>({});
   const [loading, setLoading] = useState(true);
   const [mensaje, setMensaje] = useState('');
+
+  const userData = localStorage.getItem('user');
+  const user = userData ? JSON.parse(userData) : null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,10 +70,29 @@ export default function EditarEmpleado() {
     }
   };
 
-  if (loading) return <p className="p-4">Cargando empleado...</p>;
+  const cerrarSesion = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
+  if (loading) return <p className="p-6">Cargando empleado...</p>;
 
   return (
-    <div className="p-4">
+    <div style={{ padding: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+      <h2 className="text-2xl font-bold mb-4">Editar Colaborador</h2>
+
+      <div className="button-group mb-6">
+        <button className="btn" onClick={() => navigate('/dashboard')}>Inicio</button>
+        <button className="btn" onClick={() => navigate('/empleados')}>Empleados</button>
+        <button className="btn" onClick={() => navigate('/planillas')}>Nóminas</button>
+        <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
+        <button className="btn" onClick={() => navigate('/agregar-empleados')}>Agregar empleados</button>
+        <button className="btn btn-red" onClick={cerrarSesion}>Cerrar sesión</button>
+      </div>
+
+      <h3 className="text-lg mb-4">{user?.name && `- Bienvenido, ${user.name}`}</h3>
+
       <EmpleadoForm onSubmit={handleUpdate} initialData={datos} mode="editar" />
       {mensaje && <p className="mt-4 text-blue-600">{mensaje}</p>}
     </div>

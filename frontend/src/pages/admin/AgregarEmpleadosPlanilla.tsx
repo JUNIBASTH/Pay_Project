@@ -92,11 +92,10 @@ const AgregarEmpleadosPlanilla = () => {
   };
 
   return (
-    <div style={{ maxWidth: '100%', padding: '24px' }}>
-      <h1>Agregar Empleado a Planilla</h1>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
+      <h2 className="text-2xl font-bold mb-6">Agregar Empleado a Planilla</h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Planilla y Empleado */}
         <label>Seleccionar Planilla</label>
         <select
           value={planillaSeleccionada}
@@ -124,121 +123,51 @@ const AgregarEmpleadosPlanilla = () => {
 
         {empleadoSeleccionado && (
           <>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '24px',
-                marginTop: '20px',
-              }}
-            >
-
-              {/* DATOS BÁSICOS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
               <div style={boxStyle}>
-                <h3>Datos Básicos</h3>
+                <h3 className="font-semibold text-lg mb-2">Datos Básicos</h3>
                 <p><strong>Salario:</strong> L {empleadoSeleccionado.salary}</p>
                 <p><strong>Rol:</strong> {empleadoSeleccionado.position}</p>
                 <p><strong>Tipo de Moneda:</strong> {tipoMoneda}</p>
                 <p><strong>Horas Trabajadas:</strong> {horasTrabajoDiarias}</p>
               </div>
 
-              {/* HORAS EXTRA */}
               <div style={boxStyle}>
-                <h3>Horas Extra</h3>
+                <h3 className="font-semibold text-lg mb-2">Horas Extra</h3>
                 <label>Horas Extra Normales</label>
-                <input
-                  type="number"
-                  value={horasExtraNormal}
-                  onChange={e => setHorasExtraNormal(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={horasExtraNormal} onChange={e => setHorasExtraNormal(Number(e.target.value))} style={inputStyle} />
                 <p>Pago por hora (1.25x): L {calcularPagoHora(1.25).toFixed(2)}</p>
-
                 <label>Horas Extra Extraordinarias</label>
-                <input
-                  type="number"
-                  value={horasExtraExtra}
-                  onChange={e => setHorasExtraExtra(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={horasExtraExtra} onChange={e => setHorasExtraExtra(Number(e.target.value))} style={inputStyle} />
                 <p>Pago por hora (1.5x): L {calcularPagoHora(1.5).toFixed(2)}</p>
               </div>
 
-              {/* BONOS */}
               <div style={boxStyle}>
-                <h3>Bonos</h3>
+                <h3 className="font-semibold text-lg mb-2">Bonos</h3>
                 <label>Bono Productividad</label>
-                <input
-                  type="number"
-                  value={bonoProductividad}
-                  onChange={e => setBonoProductividad(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={bonoProductividad} onChange={e => setBonoProductividad(Number(e.target.value))} style={inputStyle} />
                 <label>Bono Festivos</label>
-                <input
-                  type="number"
-                  value={bonoFestivo}
-                  onChange={e => setBonoFestivo(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={bonoFestivo} onChange={e => setBonoFestivo(Number(e.target.value))} style={inputStyle} />
                 <label>Otros Bonos</label>
-                <input
-                  type="number"
-                  value={bonoOtros}
-                  onChange={e => setBonoOtros(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={bonoOtros} onChange={e => setBonoOtros(Number(e.target.value))} style={inputStyle} />
               </div>
 
-              {/* DEDUCCIONES */}
               <div style={boxStyle}>
-                <h3>Deducciones</h3>
+                <h3 className="font-semibold text-lg mb-2">Deducciones</h3>
                 <label>Deuda Total</label>
-                <input
-                  type="number"
-                  value={deudaTotal}
-                  onChange={e => setDeudaTotal(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={deudaTotal} onChange={e => setDeudaTotal(Number(e.target.value))} style={inputStyle} />
                 <label>Cuota Mensual</label>
-                <input
-                  type="number"
-                  value={cuotaMensual}
-                  onChange={e => setCuotaMensual(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={cuotaMensual} onChange={e => setCuotaMensual(Number(e.target.value))} style={inputStyle} />
                 <label>Cuota por Actividades</label>
-                <input
-                  type="number"
-                  value={cuotaActividades}
-                  onChange={e => setCuotaActividades(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={cuotaActividades} onChange={e => setCuotaActividades(Number(e.target.value))} style={inputStyle} />
                 <label>Otras Deducciones</label>
-                <input
-                  type="number"
-                  value={otrasDeducciones}
-                  onChange={e => setOtrasDeducciones(Number(e.target.value))}
-                  style={inputStyle}
-                />
+                <input type="number" value={otrasDeducciones} onChange={e => setOtrasDeducciones(Number(e.target.value))} style={inputStyle} />
               </div>
             </div>
 
-            {/* Botones */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '24px' }}>
-              <button
-                type="button"
-                onClick={() => navigate('/dashboard')}
-                style={{ backgroundColor: '#f1f1f1', padding: '10px 20px', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                style={{ backgroundColor: '#12C48B', color: '#fff', padding: '10px 24px', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
-              >
-                Guardar
-              </button>
+            <div className="button-group mt-6">
+              <button className="btn btn-red" type="button" onClick={() => navigate('/dashboard')}>Cancelar</button>
+              <button className="btn" type="submit">Guardar</button>
             </div>
           </>
         )}
