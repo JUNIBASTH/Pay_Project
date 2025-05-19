@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const pagoEmpleadoSchema = new mongoose.Schema({
-  empleado: { type: mongoose.Schema.Types.ObjectId, ref: 'Empleado', required: true },
+  empleado: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true },
   planilla: { type: mongoose.Schema.Types.ObjectId, ref: 'Planilla', required: true },
   horasExtra: Number,
   bono: Number,

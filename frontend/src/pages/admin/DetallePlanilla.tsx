@@ -21,10 +21,10 @@ const DetallePlanilla = () => {
     };
 
     if (id && /^[0-9a-fA-F]{24}$/.test(id)) {
-        fetchPagos();
+      fetchPagos();
     } else {
-        console.warn('ID de planilla inválido:', id);
-        setLoading(false);
+      console.warn('ID de planilla inválido:', id);
+      setLoading(false);
     }
   }, [id]);
 
@@ -32,39 +32,43 @@ const DetallePlanilla = () => {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
-      <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '24px' }}>
         Detalles de la Planilla
       </h2>
 
       <div className="bg-white rounded-xl shadow p-4 overflow-auto">
-        <table className="w-full border">
-          <thead className="bg-gray-100">
+        <table className="dashboard-table">
+          <thead>
             <tr>
-              <th className="border px-2 py-1">Empleado</th>
-              <th className="border px-2 py-1">Código</th>
-              <th className="border px-2 py-1">Puesto</th>
-              <th className="border px-2 py-1">Tipo de Nómina</th>
-              <th className="border px-2 py-1">Salario Base</th>
-              <th className="border px-2 py-1">Horas Extra</th>
-              <th className="border px-2 py-1">Bonos</th>
-              <th className="border px-2 py-1">Deducciones</th>
-              <th className="border px-2 py-1">Total Pagado</th>
-              <th className="border px-2 py-1">Acciones</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Código</th>
+              <th>Puesto</th>
+              <th>Tipo de Nómina</th>
+              <th>Salario Base</th>
+              <th>Horas Extra</th>
+              <th>Bonos</th>
+              <th>Deducciones</th>
+              <th>Total Pagado</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {pagos.map((pago) => (
               <tr key={pago._id}>
-                <td className="border px-2 py-1">{pago.empleado?.nombre || '—'}</td>
-                <td className="border px-2 py-1">{pago.empleado?.employeeCode || '—'}</td>
-                <td className="border px-2 py-1">{pago.empleado?.position || '—'}</td>
-                <td className="border px-2 py-1">Mensual</td>
-                <td className="border px-2 py-1">L {pago.empleado?.salary?.toFixed(2) || '0.00'}</td>
-                <td className="border px-2 py-1">{pago.horasExtra}</td>
-                <td className="border px-2 py-1">L {pago.bono}</td>
-                <td className="border px-2 py-1">L {pago.deducciones}</td>
-                <td className="border px-2 py-1 font-semibold">L {pago.salarioCalculado}</td>
-                <td className="border px-2 py-1 text-center">
+                <td>{pago.empleado?.name || '—'}</td>
+                <td>{pago.empleado?.user?.email || '—'}</td>
+                <td>{pago.empleado?.user?.rol || '—'}</td>
+                <td>{pago.empleado?.employeeCode || '—'}</td>
+                <td>{pago.empleado?.position || '—'}</td>
+                <td>Mensual</td>
+                <td>L {pago.empleado?.salary?.toFixed(2) || '0.00'}</td>
+                <td>{pago.horasExtra}</td>
+                <td>L {pago.bono}</td>
+                <td>L {pago.deducciones}</td>
+                <td className="font-semibold">L {pago.salarioCalculado}</td>
+                <td className="text-center">
                   <button className="bg-yellow-500 text-white px-3 py-1 rounded cursor-pointer">
                     Editar
                   </button>

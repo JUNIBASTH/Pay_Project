@@ -36,8 +36,10 @@ export const registrarPagoEmpleado: RequestHandler = async (req, res) => {
   }
 };
 
-
-
+/**
+ * GET /api/pagos-empleado/planilla/:id
+ * Obtiene todos los pagos vinculados a una planilla específica
+ */
 export const obtenerPagosPorPlanilla: RequestHandler = async (req, res) => {
   try {
     const planillaId = req.params.id;
@@ -50,13 +52,16 @@ export const obtenerPagosPorPlanilla: RequestHandler = async (req, res) => {
       return;
     }
 
-    const pagos = await PagoEmpleado.find({ planilla: planillaId }).populate('empleado');
-    console.log('Pagos encontrados:', pagos);
+    const pagos = await PagoEmpleado.find({ planilla: planillaId }).populate({
+      path: 'empleado',
+      populate: { path: 'user' }
+    });
 
-    res.status(200).json(pagos); 
+    console.log('Pagos encontrados:', pagos);
+    res.status(200).json(pagos);
   } catch (error: any) {
     console.error('Error en pagos por planilla:', error);
-    res.status(500).json({ error: 'Error al obtener pagos de la planilla' }); 
+    res.status(500).json({ error: 'Error al obtener pagos de la planilla' });
   }
 };
 

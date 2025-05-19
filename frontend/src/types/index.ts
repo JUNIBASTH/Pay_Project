@@ -24,7 +24,19 @@ export interface Planilla {
 
 export interface PagoEmpleado {
   _id: string;
-  empleado: EmpleadoRelacionado;
+  empleado: {
+    _id: string;
+    name: string;
+    email?: string;
+    position?: string;
+    salary?: number;
+    employeeCode?: string;
+    user?: {
+      rol?: string;
+      email?: string;
+    };
+  };
+  planilla: string;
   horasExtra: number;
   bono: number;
   deducciones: number;

@@ -25,16 +25,12 @@ const Planillas = () => {
 
       const pagosPorPlanilla: Record<string, PagoEmpleado[]> = {};
       for (const p of res.data) {
-        if (!/^[0-9a-fA-F]{24}$/.test(p._id)) {
-          console.warn(`Planilla con ID inválido: ${p._id}, se omitirá`);
-          continue;
-        }
+        if (!/^[0-9a-fA-F]{24}$/.test(p._id)) continue;
 
         try {
           const resp = await axios.get<PagoEmpleado[]>(`/api/pagos-empleado/planilla/${p._id}`);
           pagosPorPlanilla[p._id] = resp.data;
         } catch (error) {
-          console.error(`Error al obtener pagos para planilla ${p._id}:`, error);
           pagosPorPlanilla[p._id] = [];
         }
       }
@@ -73,17 +69,17 @@ const Planillas = () => {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
       <div className="flex justify-between items-center mb-6">
-        <h2 style={{ fontSize: '28px', fontWeight: 'bold' }}>Planillas</h2>
+        <h2 className="text-2xl font-bold">Planillas</h2>
         <div className="flex gap-2">
           <button
             onClick={() => navigate('/agregar-empleados')}
-            className="bg-green-600 text-white px-4 py-2 rounded"
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
           >
             + Agregar Empleado
           </button>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
           >
             + Crear Planilla
           </button>
@@ -91,38 +87,39 @@ const Planillas = () => {
       </div>
 
       <div className="bg-white rounded-xl shadow p-4 overflow-auto">
-        <table className="w-full border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border px-2 py-1">Nombre</th>
-              <th className="border px-2 py-1">Fecha Inicio</th>
-              <th className="border px-2 py-1">Fecha Fin</th>
-              <th className="border px-2 py-1">Colaboradores</th>
-              <th className="border px-2 py-1">Total Pagado</th>
-              <th className="border px-2 py-1">Acciones</th>
+      <table className="dashboard-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Colaboradores</th>
+            <th>Total Pagado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {planillas.map((planilla) => (
+            <tr key={planilla._id}>
+              <td>{planilla.nombre}</td>
+              <td>{planilla.fechaInicio?.slice(0, 10)}</td>
+              <td>{planilla.fechaFin?.slice(0, 10)}</td>
+              <td>{pagos[planilla._id]?.length || 0}</td>
+              <td>L {calcularTotalPago(planilla._id).toFixed(2)}</td>
+              <td>
+                <button
+                  className="bg-green-600 text-white px-3 py-1 rounded"
+                  onClick={() => navigate(`/detalle-planilla/${planilla._id}`)}
+                >
+                  Ver Detalles
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {planillas.map((planilla) => (
-              <tr key={planilla._id}>
-                <td className="border px-2 py-1">{planilla.nombre}</td>
-                <td className="border px-2 py-1">{planilla.fechaInicio?.slice(0, 10)}</td>
-                <td className="border px-2 py-1">{planilla.fechaFin?.slice(0, 10)}</td>
-                <td className="border px-2 py-1">{pagos[planilla._id]?.length || 0}</td>
-                <td className="border px-2 py-1 font-semibold">L {calcularTotalPago(planilla._id).toFixed(2)}</td>
-                <td className="border px-2 py-1">
-                  <button
-                    className="bg-green-600 text-white px-3 py-1 rounded"
-                    onClick={() => navigate(`/detalle-planilla/${planilla._id}`)}
-                  >
-                    Ver Detalles
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
 
       {/* Modal para crear planilla */}
       {showModal && (
@@ -135,21 +132,21 @@ const Planillas = () => {
                 placeholder="Nombre de la planilla"
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                className="border p-2 w-full"
+                className="border p-2 w-full rounded"
                 required
               />
               <input
                 type="date"
                 value={fechaInicio}
                 onChange={(e) => setFechaInicio(e.target.value)}
-                className="border p-2 w-full"
+                className="border p-2 w-full rounded"
                 required
               />
               <input
                 type="date"
                 value={fechaFin}
                 onChange={(e) => setFechaFin(e.target.value)}
-                className="border p-2 w-full"
+                className="border p-2 w-full rounded"
                 required
               />
 
