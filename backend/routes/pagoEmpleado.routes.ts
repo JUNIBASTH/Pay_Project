@@ -1,10 +1,23 @@
-import express from 'express';
+import express, { RequestHandler } from 'express';
+import mongoose from 'mongoose';
 import PagoEmpleado from '../models/PagoEmpleado';
+
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+/**
+ * POST /api/pagos-empleado
+ * Registra un nuevo pago de empleado
+ */
+export const registrarPagoEmpleado: RequestHandler = async (req, res) => {
   try {
-    const { empleado, planilla, horasExtra, bono, deducciones, salarioCalculado } = req.body;
+    const {
+      empleado,
+      planilla,
+      horasExtra,
+      bono,
+      deducciones,
+      salarioCalculado
+    } = req.body;
 
     const nuevoPago = new PagoEmpleado({
       empleado,
@@ -17,21 +30,38 @@ router.post('/', async (req, res) => {
 
     await nuevoPago.save();
     res.status(201).json(nuevoPago);
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error al registrar pago:', error);
     res.status(500).json({ error: 'Error al registrar pago del empleado' });
   }
-});
+};
 
-router.get('/planilla/:id', async (req, res) => {
-    try {
-      const pagos = await PagoEmpleado.find({ planilla: req.params.id }).populate('empleado');
-      res.json(pagos);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener pagos de la planilla' });
+
+
+export const obtenerPagosPorPlanilla: RequestHandler = async (req, res) => {
+  try {
+    const planillaId = req.params.id;
+
+    console.log('Recibido ID:', planillaId);
+
+    if (!mongoose.Types.ObjectId.isValid(planillaId)) {
+      console.warn('ID inválido:', planillaId);
+      res.status(400).json({ error: 'ID de planilla inválido' });
+      return;
     }
-  });
 
+    const pagos = await PagoEmpleado.find({ planilla: planillaId }).populate('empleado');
+    console.log('Pagos encontrados:', pagos);
+
+    res.status(200).json(pagos); 
+  } catch (error: any) {
+    console.error('Error en pagos por planilla:', error);
+    res.status(500).json({ error: 'Error al obtener pagos de la planilla' }); 
+  }
+};
+
+// Registrar las rutas
+router.post('/', registrarPagoEmpleado);
+router.get('/planilla/:id', obtenerPagosPorPlanilla);
 
 export default router;

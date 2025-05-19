@@ -11,6 +11,8 @@ import CrearPlanilla from './pages/admin/CrearPlanilla';
 import AgregarEmpleadosPlanilla from './pages/admin/AgregarEmpleadosPlanilla';
 import VistaEmpleados from './pages/admin/VistaEmpleados';
 import EditarEmpleado from './pages/admin/EditarEmpleado';
+import Planillas from './pages/admin/Planillas';
+import DetallePlanilla from './pages/admin/DetallePlanilla';
 
 function App() {
   return (
@@ -45,7 +47,6 @@ function App() {
           <AgregarEmpleadosPlanilla />
         </PrivateRoute>
       } />
-      import VistaEmpleados from './pages/admin/VistaEmpleados';
 
       <Route path="/empleados" element={
         <PrivateRoute role="admin">
@@ -56,8 +57,14 @@ function App() {
       <Route path="/editar-empleado/:id" element={
         <EditarEmpleado />} />
 
+      <Route path="/detalle-planilla/:id" element={<DetallePlanilla />} />
+      
+      <Route path="/planillas" element={<Planillas />} /> 
+
       <Route path="/register" element={<Register />} />
     </Routes>
+
+    
   );
 }
 

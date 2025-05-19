@@ -10,15 +10,17 @@ const pagoEmpleadoSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export interface PagoEmpleado {
+  _id: string;
+  empleado: {
     _id: string;
-    empleado: {
-      _id: string;
-      nombre: string;
-    };
-    horasExtra: number;
-    bono: number;
-    deducciones: number;
-    salarioCalculado: number;
-  }
-
+    nombre: string;
+    employeeCode: string;
+    position: string;
+    salary: number;
+  };
+  horasExtra: number;
+  bono: number;
+  deducciones: number;
+  salarioCalculado: number;
+}
 export default mongoose.model('PagoEmpleado', pagoEmpleadoSchema);

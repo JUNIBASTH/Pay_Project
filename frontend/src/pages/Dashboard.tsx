@@ -83,11 +83,9 @@ const [datosPorRol, setDatosPorRol] = useState<
       <div className="button-group">
         <button className="btn" onClick={() => navigate('/dashboard')}>Inicio</button>
         <button className="btn" onClick={() => navigate('/empleados')}>Empleados</button>
-        <button className="btn" onClick={() => navigate('/historial-planilla')}>Nóminas</button>
-        <button className="btn" onClick={() => navigate('/crear-planilla')}>Crear planilla</button>
+        <button className="btn" onClick={() => navigate('/planillas')}>Nóminas</button>
         <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
         <button className="btn" onClick={() => navigate('/agregar-empleados')}>Agregar empleados</button>
-        <button className="btn" onClick={() => navigate('/historial-planilla')}>Historial</button>
         <button className="btn btn-red" onClick={cerrarSesion}>Cerrar sesión</button>
       </div>
       <h1 style={{ fontSize: '28px', marginBottom: '24px' }}>
