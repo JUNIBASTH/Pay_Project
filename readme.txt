@@ -37,46 +37,100 @@ CSS personalizado (basado en diseño Figma)
 
 Instalación y ejecución
 
-Requisitos previos:
+Pay_Project es una aplicación web para gestionar planillas (nóminas), empleados, pagos, horas extra, bonos y deducciones. Está pensada para pequeñas empresas que buscan automatizar su gestión de pagos.
 
-Node.js y npm
+Este documento te guiará paso a paso para que puedas instalar y usar el proyecto, aunque no tengas experiencia previa en programación.
 
-MongoDB Atlas (URI de conexión)
+ Requisitos antes de empezar
+Antes de comenzar, asegúrate de tener lo siguiente instalado en tu computadora:
 
-1. Clonar el repositorio
+Node.js (versión 18 o superior)
 
+Git
+
+MongoDB (puedes usar MongoDB local o un servicio en la nube como Atlas)
+
+ 1. Clonar el proyecto
+Abre la terminal (o consola) y escribe este comando para descargar el proyecto en tu computadora:
+
+bash
+Copiar
+Editar
 git clone https://github.com/JUNIBASTH/Pay_Project.git
+Luego entra a la carpeta del proyecto:
+
+bash
+Copiar
+Editar
 cd Pay_Project
+ 2. Instalar las dependencias
+Este proyecto tiene dos partes: el servidor (backend) y la interfaz web (frontend). Hay que instalar las dependencias en ambas.
 
-2. Variables de entorno
+🔧 Backend (servidor)
+bash
+Copiar
+Editar
+cd server
+npm install
+ Frontend (interfaz)
+Abre otra terminal (o vuelve atrás):
 
-Crear un archivo .env dentro de la carpeta backend:
+bash
+Copiar
+Editar
+cd ../client
+npm install
+⚙️ 3. Configurar las variables de entorno
+En la carpeta server, crea un archivo llamado .env con el siguiente contenido:
 
+env
+Copiar
+Editar
 PORT=5000
-MONGODB_URI=<tu_uri_de_mongo>
-JWT_SECRET=<una_clave_secreta_segura>
+MONGO_URI=mongodb://localhost:27017/pay_project
+JWT_SECRET=mitokensecreto
+ Nota: Puedes cambiar JWT_SECRET por una palabra secreta que tú elijas. Si usas MongoDB Atlas, reemplaza MONGO_URI con tu cadena de conexión de Atlas.
 
-3. Instalar dependencias
+ 4. Iniciar el servidor y la interfaz
+ Iniciar el servidor
+Desde la carpeta server:
 
-Backend
-
-cd backend
-npm install
-
-Frontend
-
-cd ../frontend
-npm install
-
-4. Ejecutar los servidores
-
-Backend
-
+bash
+Copiar
+Editar
 npm run dev
+El servidor se iniciará en http://localhost:5000.
 
-Frontend
+ Iniciar la interfaz
+Desde la carpeta client:
 
+bash
+Copiar
+Editar
 npm run dev
+La aplicación web se abrirá en http://localhost:5173 o una dirección parecida.
+
+ 5. Acceder y probar
+Abre tu navegador web y entra a:
+
+
+http://localhost:5173
+Desde ahí podrás:
+
+Crear usuarios
+
+Agregar empleados
+
+Crear planillas
+
+Registrar pagos, horas extra, deducciones y más
+
+ Problemas comunes
+MongoDB no se conecta: Asegúrate de que el servicio de MongoDB esté corriendo. Si usas Atlas, revisa que el URI sea correcto.
+
+Ingresa tu IP en MongoAtlas con el usuario, solo asi se te permitirá acceder
+
+Error en consola ECONNREFUSED o 404: Verifica que tanto el servidor como la interfaz estén corriendo.
 
 
 -----------------------------------------------------------------------------------------------------------------
