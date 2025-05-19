@@ -9,8 +9,8 @@ import PrivateRoute from './components/PrivateRoute';
 import HistorialPlanilla from './pages/admin/HistorialPlanilla';
 import CrearPlanilla from './pages/admin/CrearPlanilla';
 import AgregarEmpleadosPlanilla from './pages/admin/AgregarEmpleadosPlanilla';
-
-
+import VistaEmpleados from './pages/admin/VistaEmpleados';
+import EditarEmpleado from './pages/admin/EditarEmpleado';
 
 function App() {
   return (
@@ -45,9 +45,17 @@ function App() {
           <AgregarEmpleadosPlanilla />
         </PrivateRoute>
       } />
+      import VistaEmpleados from './pages/admin/VistaEmpleados';
 
+      <Route path="/empleados" element={
+        <PrivateRoute role="admin">
+          <VistaEmpleados />
+        </PrivateRoute>
+      } />
       
-      {/* Solo admin puede registrar usuarios */}
+      <Route path="/editar-empleado/:id" element={
+        <EditarEmpleado />} />
+
       <Route path="/register" element={<Register />} />
     </Routes>
   );

@@ -82,7 +82,7 @@ const [datosPorRol, setDatosPorRol] = useState<
       {/* Botones en una sola línea */}
       <div className="button-group">
         <button className="btn" onClick={() => navigate('/dashboard')}>Inicio</button>
-        <button className="btn" onClick={() => document.getElementById('empleados')?.scrollIntoView()}>Empleados</button>
+        <button className="btn" onClick={() => navigate('/empleados')}>Empleados</button>
         <button className="btn" onClick={() => navigate('/historial-planilla')}>Nóminas</button>
         <button className="btn" onClick={() => navigate('/crear-planilla')}>Crear planilla</button>
         <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
@@ -91,7 +91,7 @@ const [datosPorRol, setDatosPorRol] = useState<
         <button className="btn btn-red" onClick={cerrarSesion}>Cerrar sesión</button>
       </div>
       <h1 style={{ fontSize: '28px', marginBottom: '24px' }}>
-        Panel de Administrador {user?.name && `- Bienvenido, ${user.name}`}
+        {user?.name && `- Bienvenido, ${user.name}`}
       </h1>
       {/* Tabla de empleados */}
       <section id="empleados">
@@ -113,7 +113,7 @@ const [datosPorRol, setDatosPorRol] = useState<
                 <td>{emp.position}</td>
                 <td>L {emp.salary}</td>
                 <td>{emp.overtimeHours}</td>
-                <td>{emp.deductions.join(', ')}</td>
+                <td>{Array.isArray(emp.deductions) ? emp.deductions.join(', ') : 'N/A'}</td>
               </tr>
             ))}
           </tbody>

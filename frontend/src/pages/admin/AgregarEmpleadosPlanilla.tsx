@@ -19,7 +19,13 @@ const AgregarEmpleadosPlanilla = () => {
     };
 
     const fetchEmpleados = async () => {
-      const res = await axios.get<Empleado[]>('http://localhost:5000/api/empleados');
+      const token = localStorage.getItem('token');
+      const res = await axios.get<Empleado[]>('http://localhost:5000/api/employees', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
       setEmpleados(res.data);
     };
 

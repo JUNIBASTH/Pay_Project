@@ -38,6 +38,7 @@
   app.use('/api/users', userRoutes);
   app.use('/api/planillas', planillaRoutes);
   app.use('/api/pagos-empleado', pagoEmpleadoRoutes);
+  app.use('/api/employees', employeeRoutes);
 
   app.use(express.json());
 

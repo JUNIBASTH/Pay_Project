@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/styles.css'; // Asegurate de que la ruta sea correcta
+import '../styles/styles.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
