@@ -33,6 +33,41 @@ const AgregarEmpleadosPlanilla = () => {
     doc.text(`Total Calculado: L ${resumen.salarioCalculado}`, 10, 90);
     doc.save(`Resumen_${resumen.nombre}.pdf`);
   };
+  const enviarPDFPorCorreo = async () => {
+  if (!resumen || !resumen.email) {
+    alert("❌ No hay resumen o email disponible.");
+    return;
+  }
+
+  const doc = new jsPDF();
+  doc.setFontSize(14);
+  doc.text(`Resumen de pago - ${resumen.nombre}`, 10, 20);
+  doc.text(`Email: ${resumen.email}`, 10, 30);
+  doc.text(`Salario Base: L ${resumen.salarioBase}`, 10, 40);
+  doc.text(`Horas Extra (Normal): L ${resumen.pagoHorasNormal}`, 10, 50);
+  doc.text(`Horas Extra (Extra): L ${resumen.pagoHorasExtra}`, 10, 60);
+  doc.text(`Bonificaciones: L ${resumen.totalBonos}`, 10, 70);
+  doc.text(`Deducciones: L ${resumen.totalDeducciones}`, 10, 80);
+  doc.text(`Total Calculado: L ${resumen.salarioCalculado}`, 10, 90);
+
+  const pdfBlob = doc.output('blob');
+  const formData = new FormData();
+  formData.append('pdf', pdfBlob, 'ResumenDePago.pdf');
+  formData.append('email', resumen.email);
+
+  try {
+    await axios.post('http://localhost:5000/api/pdf/send-pdf', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    alert('✅ PDF enviado con éxito por correo');
+  } catch (error) {
+    console.error(error);
+    alert('❌ Error al enviar el correo');
+  }
+};
+
 
   const [horasExtraNormal, setHorasExtraNormal] = useState(0);
   const [horasExtraExtra, setHorasExtraExtra] = useState(0);
@@ -226,6 +261,9 @@ const AgregarEmpleadosPlanilla = () => {
           <p><strong>Salario Final:</strong> L {resumen.salarioCalculado.toFixed(2)}</p>
           <div style={{ marginTop: '16px' }}>
             <button onClick={generarPDF} style={{ marginRight: '12px' }}>📄 Generar PDF</button>
+            <button onClick={enviarPDFPorCorreo} style={{ marginLeft: '12px' }}>
+              📧 Enviar PDF por correo
+            </button>
             <button onClick={() => navigate('/dashboard')}>Volver al Dashboard</button>
           </div>
         </div>
