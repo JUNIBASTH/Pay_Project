@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface Props {
   initialData?: Partial<FormData>;
@@ -50,7 +50,7 @@ export default function EmpleadoForm({ initialData = {}, onSubmit, mode = 'crear
       <h1>{mode === 'editar' ? 'Editar Usuario' : 'Registrar Usuario'}</h1>
 
       <label htmlFor="name">Nombre</label>
-      <input id="name" value={form.name} onChange={handleChange} required />
+      <input id="name" value={form.name} onChange={handleChange} required className="input-field" />
 
       <label htmlFor="email">Correo electrónico</label>
       <input id="email" type="email" value={form.email} onChange={handleChange} required />

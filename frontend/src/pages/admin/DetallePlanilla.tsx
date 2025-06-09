@@ -2,12 +2,19 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { PagoEmpleado } from '../../types';
+import { useNavigate } from 'react-router-dom';
+
 
 const DetallePlanilla = () => {
   const { id } = useParams();
   const [pagos, setPagos] = useState<PagoEmpleado[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
+  const cerrarSesion = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
   useEffect(() => {
     const fetchPagos = async () => {
       try {
@@ -32,9 +39,17 @@ const DetallePlanilla = () => {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
-      <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '24px' }}>
-        Detalles de la Planilla
-      </h2>
+      <h1 style={{ fontSize: '28px', marginBottom: '24px' }}>Detalle de la Planilla</h1>
+
+      {/* Botones en una sola línea */}
+      <div className="button-group">
+        <button className="btn" onClick={() => navigate('/dashboard')}>Inicio</button>
+        <button className="btn" onClick={() => navigate('/empleados')}>Empleados</button>
+        <button className="btn" onClick={() => navigate('/planillas')}>Nóminas</button>
+        <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
+        <button className="btn" onClick={() => navigate('/agregar-empleados')}>Pagar empleados</button>
+        <button className="btn btn-red" onClick={cerrarSesion}>Cerrar sesión</button>
+      </div>
 
       <div className="bg-white rounded-xl shadow p-4 overflow-auto">
         <table className="dashboard-table">

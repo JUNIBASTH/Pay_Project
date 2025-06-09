@@ -93,13 +93,14 @@ const Planillas = () => {
         <button className="btn" onClick={() => navigate('/empleados')}>Empleados</button>
         <button className="btn" onClick={() => navigate('/planillas')}>Nóminas</button>
         <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
-        <button className="btn" onClick={() => navigate('/agregar-empleados')}>Agregar empleados</button>
+        <button className="btn" onClick={() => navigate('/agregar-empleados')}>Pagar a empleados</button>
         <button className="btn btn-red" onClick={() => {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
           navigate('/login');
         }}>Cerrar sesión</button>
       </div>
+      
 
       <div className="bg-white rounded-xl shadow p-4 overflow-auto mt-6">
         <table className="dashboard-table">
@@ -134,7 +135,15 @@ const Planillas = () => {
           </tbody>
         </table>
       </div>
-
+      <div className="flex justify-between items-center mb-4">
+        <h2 style={{ fontSize: '28px', fontWeight: 'bold' }}>Crear</h2>
+        <button
+          onClick={() => setShowModal(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Crear Nueva Planilla
+        </button>
+      </div>
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">

@@ -6,13 +6,19 @@ export interface Planilla {
   }
   
   export interface Empleado {
-    _id: string;
-  name: string;        
+  _id: string;
+  name: string;
   position?: string;
   salary?: number;
   overtimeHours?: number;
   deductions?: number[];
+  user?: {
+    email?: string;
+    rol?: string;
+    employeeCode?: string;
+  };
   }
+
   
  export interface EmpleadoRelacionado {
   _id: string;
@@ -20,7 +26,7 @@ export interface Planilla {
   employeeCode: string;
   position: string;
   salary: number;
-}
+  }
 
 export interface PagoEmpleado {
   _id: string;

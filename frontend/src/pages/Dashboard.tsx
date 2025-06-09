@@ -85,7 +85,7 @@ const [datosPorRol, setDatosPorRol] = useState<
         <button className="btn" onClick={() => navigate('/empleados')}>Empleados</button>
         <button className="btn" onClick={() => navigate('/planillas')}>Nóminas</button>
         <button className="btn" onClick={() => navigate('/register')}>Registrar Usuario</button>
-        <button className="btn" onClick={() => navigate('/agregar-empleados')}>Agregar empleados</button>
+        <button className="btn" onClick={() => navigate('/agregar-empleados')}>Pagar empleados</button>
         <button className="btn btn-red" onClick={cerrarSesion}>Cerrar sesión</button>
       </div>
       <h1 style={{ fontSize: '28px', marginBottom: '24px' }}>

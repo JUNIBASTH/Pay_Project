@@ -4,7 +4,7 @@ import User from '../models/User';
 
 export const getAllEmployees: RequestHandler = async (req, res) => {
   try {
-    const employees = await Employee.find().populate('user');
+    const employees = await Employee.find().populate('user', 'email');
     res.json(employees);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener empleados' });

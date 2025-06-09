@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+.login-container input[type="text"],
+.login-container input[type="email"],
+.login-container input[type="password"],
+.login-container input,
+.login-container select {
+  width: 250px;
+  height: 32px;
+  padding: 16px;
+  border: 0.71px solid #7B93A4;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+}
