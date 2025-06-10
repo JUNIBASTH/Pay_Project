@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import Employee from '../models/Employee';
-import User from '../models/User';
+import Employee from '../../models/Employee';
+import User from '../../models/User';
 
 export const getAllEmployees: RequestHandler = async (req, res) => {
   try {

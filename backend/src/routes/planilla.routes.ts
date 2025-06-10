@@ -1,5 +1,5 @@
 import express from 'express';
-import Planilla from '../models/Planilla';
+import Planilla from '../../models/Planilla';
 const router = express.Router();
 
 router.post('/', async (req, res) => {

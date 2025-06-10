@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import bcrypt from 'bcrypt';
-import User from '../models/User';
+import User from '../../models/User';
 
 export const createUser: RequestHandler = async (req, res): Promise<void> => {
   try {

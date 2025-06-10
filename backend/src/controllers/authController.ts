@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express'; 
-import User from '../models/User';
-import Employee from '../models/Employee';
+import User from '../../models/User';
+import Employee from '../../models/Employee';
 import { RequestHandler } from 'express';
 
 

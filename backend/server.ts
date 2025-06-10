@@ -3,11 +3,11 @@
   import dotenv from 'dotenv';
   import path from 'path';
   import { connectDB } from './config/db';
-  import employeeRoutes from './routes/employeeRoutes';
-  import authRoutes from './routes/authRoutes'; 
-  import userRoutes from './routes/userRoutes';
-  import planillaRoutes from './routes/planilla.routes';
-  import pagoEmpleadoRoutes from './routes/pagoEmpleado.routes';
+  import employeeRoutes from './src/routes/employeeRoutes';
+  import authRoutes from './src/routes/authRoutes'; 
+  import userRoutes from './src/routes/userRoutes';
+  import planillaRoutes from './src/routes/planilla.routes';
+  import pagoEmpleadoRoutes from './src/routes/pagoEmpleado.routes';
 
   dotenv.config({ path: path.resolve(__dirname, './.env') });
   //dotenv.config();

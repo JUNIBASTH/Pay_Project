@@ -1,6 +1,6 @@
 import express, { RequestHandler } from 'express';
 import mongoose from 'mongoose';
-import PagoEmpleado from '../models/PagoEmpleado';
+import PagoEmpleado from '../../models/PagoEmpleado';
 
 const router = express.Router();
 

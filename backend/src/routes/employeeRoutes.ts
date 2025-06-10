@@ -7,7 +7,7 @@ import {
   actualizarEmpleado,
 
 } from '../controllers/employeeController';
-import { verifyToken, isAdmin } from '../middleware/authMiddleware';
+import { verifyToken, isAdmin } from '../../middleware/authMiddleware';
 
 const router = express.Router();
 
