@@ -67,19 +67,15 @@ cd Pay_Project
 Este proyecto tiene dos partes: el servidor (backend) y la interfaz web (frontend). Hay que instalar las dependencias en ambas.
 
 🔧 Backend (servidor)
-bash
-Copiar
-Editar
-cd server
 npm install
- Frontend (interfaz)
+🔧Frontend (interfaz)
 Abre otra terminal (o vuelve atrás):
 
-bash
-Copiar
-Editar
-cd ../client
-npm install
+Si npm install falla por un error "No se puede cargar el archivo C:\Program Files\nodejs\npm.ps1 porque la ejecución de scripts está deshabilitada en este sistema"
+Ejecutar: 
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process 
+
+
 ⚙️ 3. Configurar las variables de entorno
 En la carpeta server, crea un archivo llamado .env con el siguiente contenido:
 
@@ -89,26 +85,28 @@ Editar
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/pay_project
 JWT_SECRET=mitokensecreto
- Nota: Puedes cambiar JWT_SECRET por una palabra secreta que tú elijas. Si usas MongoDB Atlas, reemplaza MONGO_URI con tu cadena de conexión de Atlas.
+ Nota: Las variables actualmente las estoy subiendo por conveniencia, asi que no es necesario hacer este paso a menos que las haya ocultado
 
  4. Iniciar el servidor y la interfaz
- Iniciar el servidor
-Desde la carpeta server:
+Iniciar el servidor
+  Desde la carpeta Backend: 
+  En terminal ejecutar:
+    npm run dev
+  La aplicación web se abrirá en http://localhost:5173 o una dirección parecida.
+  Si funciona mostrará:
+    🚀 Servidor corriendo en http://localhost:5000
+    ✅ Conectado a MongoDB
+  
+  Si muestra el error "No se puede cargar el archivo C:\Program Files\nodejs\npm.ps1 porque la ejecución de 
+scripts está deshabilitada en este sistema"
+  Ejecutar en la terminal abierta en Backend: 
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process 
 
-bash
-Copiar
-Editar
-npm run dev
-El servidor se iniciará en http://localhost:5000.
-
- Iniciar la interfaz
-Desde la carpeta client:
-
-bash
-Copiar
-Editar
-npm run dev
-La aplicación web se abrirá en http://localhost:5173 o una dirección parecida.
+  Desde la carpeta Frontend: 
+  En terminal ejecutar:
+    npm run dev
+  Si funciona mostrará:
+    VITE v6.2.3  ready in xxx ms
 
  5. Acceder y probar
 Abre tu navegador web y entra a:
@@ -125,12 +123,12 @@ Crear planillas
 
 Registrar pagos, horas extra, deducciones y más
 
- Problemas comunes
-MongoDB no se conecta: Asegúrate de que el servicio de MongoDB esté corriendo. Si usas Atlas, revisa que el URI sea correcto.
+Problemas comunes
+  MongoDB no se conecta: Asegúrate de que el servicio de MongoDB esté corriendo. Si usas Atlas, revisa que el URI sea correcto.
 
-Ingresa tu IP en MongoAtlas con el usuario, solo asi se te permitirá acceder
+  Ingresa tu IP en MongoAtlas con el usuario, solo asi se te permitirá acceder
 
-Error en consola ECONNREFUSED o 404: Verifica que tanto el servidor como la interfaz estén corriendo.
+  Error en consola ECONNREFUSED o 404: Verifica que tanto el servidor como la interfaz estén corriendo.
 
 
 -----------------------------------------------------------------------------------------------------------------
