@@ -13,6 +13,7 @@ import VistaEmpleados from './pages/admin/VistaEmpleados';
 import EditarEmpleado from './pages/admin/EditarEmpleado';
 import Planillas from './pages/admin/Planillas';
 import DetallePlanilla from './pages/admin/DetallePlanilla';
+import DashboardUser from './pages/user/DashboardUser';
 
 function App() {
   return (
@@ -54,14 +55,15 @@ function App() {
         </PrivateRoute>
       } />
       
-      <Route path="/editar-empleado/:id" element={
-        <EditarEmpleado />} />
+      <Route path="/editar-empleado/:id" element={<EditarEmpleado />} />
 
       <Route path="/detalle-planilla/:id" element={<DetallePlanilla />} />
       
       <Route path="/planillas" element={<Planillas />} /> 
 
       <Route path="/register" element={<Register />} />
+
+      <Route path="/dashboard-user" element={<DashboardUser />} />
     </Routes>
 
     

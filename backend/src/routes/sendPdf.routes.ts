@@ -1,10 +1,10 @@
-import { Router } from 'express';
 import { sendPdfByEmail } from '../controllers/sendPdfController';
+import { Router } from 'express';
 
 const router = Router();
 
-router.post('/send-pdf', (req, res, next) => {
-  console.log("📩 Ruta /api/pdf/send-pdf fue llamada");
-  next();
-}, sendPdfByEmail);
+router.get('/ping', (req, res) => {
+  res.send('pong desde sendPdf.routes');
+});
+
 export default router;

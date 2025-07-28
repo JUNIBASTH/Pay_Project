@@ -1,6 +1,7 @@
 import express, { RequestHandler } from 'express';
 import mongoose from 'mongoose';
 import PagoEmpleado from '../../models/PagoEmpleado';
+import { verifyToken, isAdmin } from '../../middleware/authMiddleware';
 
 const router = express.Router();
 
@@ -66,7 +67,7 @@ export const obtenerPagosPorPlanilla: RequestHandler = async (req, res) => {
 };
 
 // Registrar las rutas
-router.post('/', registrarPagoEmpleado);
-router.get('/planilla/:id', obtenerPagosPorPlanilla);
+router.post('/', verifyToken, isAdmin, registrarPagoEmpleado);
+router.get('/planilla/:id', verifyToken, isAdmin, obtenerPagosPorPlanilla);
 
 export default router;

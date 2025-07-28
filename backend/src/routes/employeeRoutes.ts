@@ -12,7 +12,7 @@ import { verifyToken, isAdmin } from '../../middleware/authMiddleware';
 const router = express.Router();
 
 // ✅ Rutas protegidas con middleware
-router.get('/', verifyToken, getAllEmployees);
+router.get('/', verifyToken, isAdmin, getAllEmployees);
 router.get('/:id', verifyToken, getEmployeeById);
 router.post('/', verifyToken, isAdmin, createEmployee);
 router.patch('/:id/estado', verifyToken, isAdmin, actualizarEstadoEmpleado);

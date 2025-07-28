@@ -1,10 +1,11 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import  User  from '../../models/User';
+import { verifyToken, isAdmin } from '../../middleware/authMiddleware';
 
 const router = Router();
 
-router.post('/register', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.post('/register', verifyToken, isAdmin, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     console.log("Datos recibidos:", req.body);
     const { nombre, email, password, rol } = req.body;

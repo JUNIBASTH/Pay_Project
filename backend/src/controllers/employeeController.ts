@@ -1,6 +1,8 @@
 import { RequestHandler } from 'express';
+import { Response } from 'express';
 import Employee from '../../models/Employee';
 import User from '../../models/User';
+import { AuthRequest } from '../../middleware/authMiddleware';
 
 export const getAllEmployees: RequestHandler = async (req, res) => {
   try {
@@ -11,9 +13,11 @@ export const getAllEmployees: RequestHandler = async (req, res) => {
   }
 };
 
-export const getEmployeeById: RequestHandler = async (req, res) => {
+export const getEmployeeById = async (req: AuthRequest, res:Response): Promise<void> => {
   try {
     const { id } = req.params;
+    const { rol, id: userId } = req.user;
+
     const employee = await Employee.findById(id).populate('user');
 
     if (!employee) {
@@ -21,7 +25,13 @@ export const getEmployeeById: RequestHandler = async (req, res) => {
       return;
     }
 
-    res.status(200).json(employee); 
+    // Si no es admin, solo puede acceder a su propio perfil
+    if (rol !== 'admin' && String((employee.user as any)._id || employee.user) !== userId) {
+      res.status(403).json({ message: 'No tienes permiso para acceder a este perfil' });
+      return;
+    }
+
+    res.status(200).json(employee);
   } catch (error: any) {
     res.status(500).json({ message: 'Error al obtener empleado', error: error.message });
   }

@@ -2,7 +2,7 @@ import { RequestHandler } from 'express';
 import bcrypt from 'bcrypt';
 import User from '../../models/User';
 
-export const createUser: RequestHandler = async (req, res): Promise<void> => {
+/*export const createUser: RequestHandler = async (req, res): Promise<void> => {
   try {
     const { nombre, email, password, rol } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -11,7 +11,7 @@ export const createUser: RequestHandler = async (req, res): Promise<void> => {
   } catch (error) {
     res.status(500).json({ message: 'Error al crear el usuario' });
   }
-};
+};*/ // movido a register
 
 export const getUsers: RequestHandler = async (req, res): Promise<void> => {
   try {

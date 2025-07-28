@@ -33,7 +33,11 @@ export default function Login() {
       localStorage.setItem('user', JSON.stringify(data.user));
   
       setMessage('Login exitoso ✅');
-      navigate('/dashboard'); // ✅ Redirigir al dashboard
+      if (data.user.rol === 'admin') {
+      navigate('/dashboard');
+    } else {
+      navigate('/dashboard-user');
+    }
     } catch (error) {
       console.error(error);
       setMessage('Error al iniciar sesión');

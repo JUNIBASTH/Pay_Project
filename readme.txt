@@ -154,7 +154,7 @@ GET /api/employees: ver lista
 POST /api/employees: agregar nuevo (solo admin)
 
 
-nombre: 'Super Admin',
+Usuario Administrador(Admin):
   email: 'admin@empresa.com',
   password: '$2b$10$JjdZh1R8JqVxakP4blfZ/uRhl8EJqXuLezjwoouAmGXXtGBJRQpMO',
   rol: 'admin',
@@ -164,6 +164,19 @@ nombre: 'Super Admin',
 
   email: 'admin@gmail.com',
   password: 'admin123',
+
+
+Usuario Empleado (User): 
+
+  "_id": "682afe960ad01da4e996bb2f",
+  "name": "Prueba Vista Empleado 17",
+  "email": "admin17@empresa.com",
+  "password": "$2b$10$8Sa2a9J3pAmtN15BSxYFc.wByhXRsKKR8VZ2Z2/SyOD.2YeLDVGx6",
+  "rol": "user",
+  "__v": 0
+
+  email: admin17@empresa.com
+  Password: admin123
 -----------------------------------------------------------------------------------------------------------------
 
 Estructura del proyecto

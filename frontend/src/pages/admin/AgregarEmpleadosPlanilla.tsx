@@ -51,8 +51,10 @@ const AgregarEmpleadosPlanilla = () => {
   doc.text(`Total Calculado: L ${resumen.salarioCalculado}`, 10, 90);
 
   const pdfBlob = doc.output('blob');
+  const file = new File([pdfBlob], 'ResumenDePago.pdf', { type: 'application/pdf' });
+  
   const formData = new FormData();
-  formData.append('pdf', pdfBlob, 'ResumenDePago.pdf');
+  formData.append('pdf', file);
   formData.append('email', resumen.email);
 
   try {

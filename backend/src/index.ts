@@ -33,5 +33,7 @@ app.use('/api/pdf', sendPdfRoutes);
 
 // Levantar servidor
 app.listen(PORT, () => {
+  console.log('📁 Importando rutas PDF:', sendPdfRoutes);
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  
 });
